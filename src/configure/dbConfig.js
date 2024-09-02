@@ -6,7 +6,7 @@ const connection = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: '123',
-  database: 'idw',
+  database: 'rd_tp_integrador',
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
