@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "tp_integrador_prog_III_2024",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "nodemon ./src/index.js",
-    "start": "node index.js"
+    "dev": "node --watch ./src/index.js",
+    "start": "./src/node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,4 +23,6 @@
     "mysql2": "^3.11.0",
     "nodemon": "^3.1.4"
   }
+  
 }
+
