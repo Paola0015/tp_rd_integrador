@@ -19,7 +19,7 @@ app.use(express.json());//procesa el body del req
 
 //Rutas - EndPoint's
 app.get('/', (req, res) => {
-    res.status(200).json({'Estado':true })
+  res.status(200).json({'Estado':true })
 })
 
 app.post('/notificacion',(req, res) =>{
