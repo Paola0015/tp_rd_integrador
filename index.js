@@ -6,6 +6,7 @@ import Handlebars from 'handlebars';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import cors from 'cors';
 
 dotenv.config(); //configra las variables de entorno desde .env
 
@@ -14,6 +15,9 @@ const app = express();
 
 
 //Midlewares
+app.use(cors({
+  origin: 'http://localhost:5173', // Permite solicitudes desde este origen
+}));
 app.use(express.json());//procesa el body del req
 
 
