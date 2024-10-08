@@ -23,3 +23,12 @@ app.use(validateContentType);
 app.get('/', (req, res) => {
     res.json({'estado':true});
 });
+
+app.use('/api/v1/reclamos-estados', v1ReclamosEstadoRouter);
+app.use('/api/v1/reclamos', v1ReclamosRouter);
+
+//Config del servidor express
+app.listen(PORT, () => {
+    console.log(`*** Servidor escuchando en puerto: ${PORT} ***`)
+  });
+  
