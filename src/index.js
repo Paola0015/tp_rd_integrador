@@ -13,7 +13,8 @@ import validateContentType from './middlewares/validateContentType.js';
 import { router as  v1ReclamosEstadoRouter } from './v1/routes/reclamosEstadosRoutes.js';
 import { router as v1ReclamosRouter } from './v1/routes/reclamosRoutes.js';
 
-dotenv.config();
+dotenv.config(); //configura las variables de entorno
+const PORT = process.env.PUERTO;
 
 const app = express();
 
@@ -23,9 +24,9 @@ app.use(validateContentType);
 app.get('/', (req, res) => {
     res.json({'estado':true});
 });
-
-app.use('/api/v1/reclamos-estados', v1ReclamosEstadoRouter);
-app.use('/api/v1/reclamos', v1ReclamosRouter);
+//Rutas de los EndPoints
+app.use('/v1/reclamos-estados', v1ReclamosEstadoRouter);
+app.use('/v1/reclamos', v1ReclamosRouter);
 
 //Config del servidor express
 app.listen(PORT, () => {
