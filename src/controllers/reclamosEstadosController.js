@@ -5,7 +5,7 @@ export default class ReclamosEstadosController{
     constructor(){
         this.service = new ReclamosEstadosService();
     }
-
+ 
     buscarTodos = async (req, res) => {
         try{
             const reclamosEstados = await this.service.buscarTodos();
