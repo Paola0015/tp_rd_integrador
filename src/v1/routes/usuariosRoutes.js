@@ -1,10 +1,10 @@
 import express from "express";
-import usuariosControler from "../../controllers/usuariosControler";
+import UsuariosController from "../../controllers/usuariosController.js";
 
 
-const router = express.Route();
-const usuariosControler = new usuariosControler();
+const router = express.Router();
+const usuariosController = new UsuariosController();
 
-router.get ('/', usuariosControler.buscarTodos);
+router.get ('/', usuariosController.buscarTodos);
 
 export {router};

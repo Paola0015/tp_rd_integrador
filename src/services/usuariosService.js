@@ -1,4 +1,4 @@
-import Usuarios from "../database/usuarios";
+import Usuarios from "../database/usuarios.js";
 
 export default class UsuariosService {
     constructor(){

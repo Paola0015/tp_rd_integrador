@@ -1,11 +1,12 @@
-import UsuariosService from "../services/usuariosService";
+import UsuariosService from "../services/usuariosService.js";
 
-export default class usuariosControler {
+export default class UsuariosController {
     constructor(){
         this.service = new UsuariosService();
+    }
 
         buscarTodos = async (req, res) =>{
-            try{
+            try{ 
                 const usuarios = await this.service.buscarTodos();
                 res.status(200).send(usuarios);
             }catch(error){
@@ -14,5 +15,4 @@ export default class usuariosControler {
                 });
             }
         }
-    }
 }
