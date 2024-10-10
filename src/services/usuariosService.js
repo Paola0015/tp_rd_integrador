@@ -8,4 +8,25 @@ export default class UsuariosService {
     buscarTodos = () => {
         return this.usuarios.buscarTodos();
     }
+    
+    buscarActivos = () => {
+        return this.usuarios.buscarActivos();
+    }
+
+    buscarPorId = (idUsuario) => {
+        return this.usuarios.buscarPorId(idUsuario);
+    }
+
+    borrarUsuario = (idUsuario) => {
+        return this.usuarios.borrarPorId(idUsuario);
+    }
+
+    crearUsuario = (nuevoUsuario) => {
+        return this.usuarios.crearUsuario(nuevoUsuario);
+    }
+
+    actualizarUsuario = (idUsuario, datosActualizados) =>{
+        return this.usuarios.actualizarUsuario(idUsuario, datosActualizados);
+    }
+
 }
