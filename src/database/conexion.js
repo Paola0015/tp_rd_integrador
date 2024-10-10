@@ -12,4 +12,4 @@ export const conexion = await mysql.createConnection({
     password: process.env.PASS,
 });
 
-console.log('### Conexión a la DB exitosa! ###')
+console.log('.oO( Conexión a la DB exitosa! )Oo.\n')
