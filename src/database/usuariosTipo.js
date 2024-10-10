@@ -7,4 +7,6 @@ export default class UsuariosTipo{
         const [result] = await conexion.query(sql);
         return result;
     };
+
+    
 }

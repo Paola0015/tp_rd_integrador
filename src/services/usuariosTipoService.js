@@ -9,4 +9,6 @@ export default class UsuariosTipoService{
         return this.usuariosTipo.buscarTodos();
     
     }
+
+    
 }

@@ -6,6 +6,7 @@ const usuariosTipoController = new UsuariosTipoController();
 
 router.get('/', usuariosTipoController.buscarTodos);
 
+
 export {router};
 
 
