@@ -1,23 +1,33 @@
 import jwt from "jsonwebtoken";
 
-const verifyToken = (req, res, next) => {
-  const token = req.header("Authorization")?.replace("Bearer ", "");
+export const verifyToken = (req, res, next) => {
+  const token = req.headers["authorization"];
 
   if (!token) {
-    return res
-      .status(401)
-      .json({ message: "Acceso denegado. No se proporcionó un token." });
+    return res.status(403).json({ mensaje: "No se proporcionó un token." });
   }
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
     req.user = decoded;
-
     next();
   } catch (error) {
-    res.status(400).json({ message: "Token inválido o expirado." });
+    return res.status(401).json({ mensaje: "Token inválido o expirado." });
   }
 };
 
-export default verifyToken;
+export const verifyRole = (rolesPermitidos) => {
+  return (req, res, next) => {
+    const { perfil } = req.user;
+
+    if (!rolesPermitidos.includes(perfil)) {
+      return res
+        .status(403)
+        .json({
+          mensaje: "Acceso denegado. No tienes permiso para esta acción.",
+        });
+    }
+
+    next();
+  };
+};

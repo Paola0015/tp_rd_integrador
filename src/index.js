@@ -8,16 +8,15 @@ import { fileURLToPath } from "url";
 
 // middlewares
 import validateContentType from "./middlewares/validateContentType.js";
+import { verifyToken, verifyRole } from "./middlewares/auth.js";
 
 // rutas
 import { router as v1ReclamosEstadoRouter } from "./v1/routes/reclamosEstadosRoutes.js";
 import { router as v1ReclamosRouter } from "./v1/routes/reclamosRoutes.js";
-
 import { router as v1Usuarios } from "./v1/routes/usuariosRoutes.js";
-
 import { authRouter } from "./v1/routes/authRoutes.js";
 
-dotenv.config(); // configura las variables de entorno
+dotenv.config();
 const PORT = process.env.PUERTO;
 
 const app = express();
@@ -30,13 +29,25 @@ app.get("/", (req, res) => {
 });
 
 // Rutas de los EndPoints
-app.use("/v1/reclamos-estados", v1ReclamosEstadoRouter);
-app.use("/v1/reclamos", v1ReclamosRouter);
-app.use("/v1/usuarios", v1Usuarios);
-app.use("/v1/auth", authRouter);
-// Mantén solo las rutas necesarias
 
-// Config del servidor express
+app.use(
+  "/v1/reclamos-estados",
+  verifyToken,
+  verifyRole(["empleado"]),
+  v1ReclamosEstadoRouter
+);
+
+app.use(
+  "/v1/reclamos",
+  verifyToken,
+  verifyRole(["cliente", "empleado"]),
+  v1ReclamosRouter
+);
+
+app.use("/v1/usuarios", verifyToken, verifyRole(["admin"]), v1Usuarios);
+
+app.use("/v1/auth", authRouter);
+
 app.listen(PORT, () => {
   console.log(`*** Servidor escuchando en puerto: ${PORT} ***`);
 });

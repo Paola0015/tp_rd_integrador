@@ -1,61 +1,68 @@
 import ReclamosService from "../services/reclamosService.js";
 
-export default class ReclamosController{
+export default class ReclamosController {
 
-    constructor(){
+    constructor() {
         this.service = new ReclamosService();
     }
 
+    // Buscar los reclamos
     buscarTodos = async (req, res) => {
-        try{
+        try {
             const reclamos = await this.service.buscarTodos();
-            res.status(200).send(reclamos)
-
-        }catch (error){
-            console.log(error);
+            if (reclamos.length === 0) {
+                return res.status(404).send({
+                    estado: "Falla",
+                    mensaje: "No se encontraron reclamos."
+                });
+            }
+            res.status(200).send({
+                estado: "OK",
+                data: reclamos
+            });
+        } catch (error) {
+            console.error("Error al buscar reclamos:", error);
             res.status(500).send({
-                estado:"Falla", mensaje: "Error interno en servidor."
+                estado: "Falla",
+                mensaje: "Error interno en el servidor.",
+                error: error.message
             });
         }
     }
 
-    // buscarPorId = async (req, res) => {
-    // }
-    
-    // no recibo el idReclamoEstado, al crear un nuevo reclamo siempre sera de tipo 1 "creado"
-    // fechaCreado lo hago con NOW() de mysql
+    // Creo un nuevo reclamo
     crear = async (req, res) => {
         const { asunto, idReclamoTipo, idUsuarioCreador } = req.body;
-        
-        if (asunto === undefined || idReclamoTipo === undefined || idUsuarioCreador === undefined) {
+
+        // Validar los datos 
+        if (!asunto || !idReclamoTipo || !idUsuarioCreador) {
             return res.status(400).send({
-                estado:"Falla",
-                mensaje: "Faltan datos obligatorios."    
-            })
+                estado: "Falla",
+                mensaje: "Faltan datos obligatorios. Los campos 'asunto', 'idReclamoTipo' y 'idUsuarioCreador' son necesarios."
+            });
         }
-        
-        try{
+
+        try {
             const reclamo = {
-                asunto, 
-                idReclamoTipo, 
-                idUsuarioCreador
-            }
+                asunto,
+                idReclamoTipo,
+                idUsuarioCreador,
+                idReclamoEstado: 1 /
+            };
 
             const nuevoReclamo = await this.service.crear(reclamo);
-            res.status(201).send({
-                estado:"OK", data: nuevoReclamo
-            });
 
-        }catch (error){
-            console.log(error);
+            res.status(201).send({
+                estado: "OK",
+                data: nuevoReclamo
+            });
+        } catch (error) {
+            console.error("Error al crear el reclamo:", error);
             res.status(500).send({
-                estado:"Falla", mensaje: "Error interno en servidor."
+                estado: "Falla",
+                mensaje: "Error interno en el servidor.",
+                error: error.message
             });
         }
     }
-
-
-    // modificar = async (req, res) => {
-    // }
-
 }
