@@ -29,7 +29,7 @@ export default class Oficinas{
                 mensaje: "Error interno en servidor."
             });
         }
-    }
+    };
     borrarOficina = async (req, res) =>{
         try {
             const idOficina = req.params.id; 
@@ -69,4 +69,28 @@ export default class Oficinas{
             });
     }  
         };
+        
+        actualizarOficina = async (req, res) => {
+            try {
+                const idOficina = req.params.id; 
+                const datosActualizados = req.body;
+        
+                console.log("Datos recibidos para actualizar el usuario de oficina:", idOficina,datosActualizados);
+        
+                const resultado = await this.service.actualizarOficina(idOficina, datosActualizados);
+                console.log(resultado);
+                
+                return res.status(200).send(resultado);
+        
+            } catch (error) {
+                console.error("Error al intentar actualizar el usuario de oficina :", error);
+                return res.status(500).send({
+                    estado: "Falla",
+                    mensaje: "Error interno en servidor.",
+                    error: error.message
+                });
+            }
+        };
+
+       
 }

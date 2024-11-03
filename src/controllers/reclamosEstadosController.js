@@ -18,46 +18,85 @@ export default class ReclamosEstadosController{
         }
     }
 
-    // buscarPorId = async (req, res) => {
-    // }
-    
-    crear = async (req, res) => {
-        const { descripcion, activo } = req.body;
-        
-        if (!descripcion) {
-            return res.status(400).send({
-                estado:"Falla",
-                mensaje: "Se requiere el campo descripción."    
-            })
-        }
-        
-        if (activo === undefined || activo === null){
-            return res.status(400).send({
-                estado:"Falla",
-                mensaje: "Se requiere el campo activo."    
-            })
-        }
-
+    buscarPoId = async (req, res) =>{
         try{
-            const reclamoEstado = {
-                descripcion, 
-                activo
+            const idReclamoEstado = req.params.id;
+            const reclamoEstado = await this.service.buscarPorId(idReclamoEstado);
+            console.log(reclamoEstado);
+
+            if(!reclamoEstado){
+                return res.status(404).send({mensaje: 'Tipo de estado de reclamo no encontrado'});
             }
-
-            const nuevoReclamoEstado = await this.service.crear(reclamoEstado);
-            res.status(201).send({
-                estado:"OK", data: nuevoReclamoEstado
+            res.status(200).send(reclamoEstado);
+        }catch(error){
+                res.status(500).send({
+                    estado:"Falla", mensaje: "Error interno en servidor."
+                });
+            }
+    }
+    
+    crear = async (req,res) =>{
+        try {
+            const nuevoEstadoReclamo = req.body;
+    
+            if (!nuevoEstadoReclamo.descripcion) {
+                return res.status(400).send({ mensaje: 'La descripción es obligatoria' });
+            }
+    
+            console.log("Datos recibidos para crear estado de reclamo:", nuevoEstadoReclamo);
+    
+            const resultado = await this.service.crear(nuevoEstadoReclamo);
+    
+            return res.status(201).send(resultado);
+    
+        } catch (error) {
+            console.error("Error al intentar crear el tipo de usuario:", error);
+            return res.status(500).send({
+                estado: "Falla",
+                mensaje: "Error interno en servidor.",
+                error: error.message
             });
+        }
+    };
+    
+    actualizar = async (req, res) => {
+        try {
+            const idReclamoEstado = req.params.id; 
+            const datosActualizados = req.body;
+    
+            console.log("Datos recibidos para actualizar el estado de reclamo:", datosActualizados);
+    
+            const resultado = await this.service.modificar(idReclamoEstado, datosActualizados);
+            console.log(resultado);
+            
+            return res.status(200).send(resultado);
+    
+        } catch (error) {
+            console.error("Error al intentar actualizar el estado del reclamo:", error);
+            return res.status(500).send({
+                estado: "Falla",
+                mensaje: "Error interno en servidor.",
+                error: error.message
+            });
+        }
+    };
 
-        }catch (error){
-            console.log(error);
-            res.status(500).send({
-                estado:"Falla", mensaje: "Error interno en servidor."
+    borrar = async (req,res) =>{
+        try {
+            const idReclamoEstado = req.params.id; 
+    
+            const resultado = await this.service.borrar(idReclamoEstado);
+    
+            return res.status(200).send(resultado);
+    
+        } catch (error) {
+            console.error("Error al intentar eliminar el tipo de estado de reclamo:", error);
+            return res.status(500).send({
+                estado: "Falla",
+                mensaje: "Error interno en servidor.",
+                error: error.message
             });
         }
     }
-    
-    // modificar = async (req, res) => {
-    // }
 
 }

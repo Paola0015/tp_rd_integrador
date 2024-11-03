@@ -3,7 +3,9 @@ import { conexion } from "./conexion.js";
 export default class Usuarios{
 
     buscarTodos = async () => {
-        const sql = 'SELECT * FROM usuarios;';
+        const sql = `SELECT u.*, ut.descripcion AS idTipoUsuario
+        FROM usuarios u
+        INNER JOIN usuariosTipo ut ON u.idTipoUsuario = ut.idUsuarioTipo;`;
         const [result] = await conexion.query(sql);
         return result;
     }

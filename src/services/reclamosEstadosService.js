@@ -10,13 +10,23 @@ export default class ReclamosEstadosService {
         return this.reclamosEstados.buscarTodos();
     }
 
-    // buscarPorId = () => {
-    // }
+    buscarPorId = (idReclamoEstado) => {
+        return this.reclamosEstados.buscarPorId(idReclamoEstado);
+     }
     
     crear = (reclamoEstado) => {
         return this.reclamosEstados.crear(reclamoEstado);
     }
 
-    // modificar = () => {
-    // }
+     modificar = (idReclamoEstado, datosActualizados) => {
+        return this.reclamosEstados.actualizarReclamoEstado(idReclamoEstado,datosActualizados);
+     }
+
+     borrar = (idReclamoEstado) =>{
+        return this.reclamosEstados.borrar(idReclamoEstado);
+     }
+
+     crear = (descripcion) =>{
+        return this.reclamosEstados.crear(descripcion);
+     }
 }

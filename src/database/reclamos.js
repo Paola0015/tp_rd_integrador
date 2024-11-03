@@ -1,6 +1,6 @@
 import { conexion } from "./conexion.js";
 
-export default class Reclamos{
+export default class Reclamos{ 
 
     buscarTodos = async () => {
         const sql = `SELECT r.asunto, r.descripcion, r.fechaCreado, r.fechaFinalizado, r.fechaCancelado, 
@@ -8,8 +8,8 @@ export default class Reclamos{
                         r.idReclamoTipo, rt.descripcion AS "Descripción Tipo", 
                         u.nombre AS "Creado por"
                         FROM reclamos AS r
-                        INNER JOIN reclamos_tipo AS rt ON rt.idReclamoTipo = r.idReclamoTipo
-                        INNER JOIN reclamos_estado AS re ON re.idReclamoEstado = r.idReclamoEstado
+                        INNER JOIN reclamosTipo AS rt ON rt.idReclamoTipo = r.idReclamoTipo
+                        INNER JOIN reclamosEstado AS re ON re.idReclamoEstado = r.idReclamoEstado
                         INNER JOIN usuarios AS u ON u.idUsuario = r.idUsuarioCreador;`
 
         const [result] = await conexion.query(sql);

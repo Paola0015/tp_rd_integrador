@@ -7,9 +7,9 @@ const router = express.Router();
 const reclamosController = new ReclamosController();
 
 router.get('/', reclamosController.buscarTodos);
-// router.get('/:idReclamo', reclamosController.buscarPorId);
+router.get('/:id', reclamosController.buscarPorId);
 router.post('/', reclamosController.crear);
 // router.patch('/:idReclamo', reclamosController.modificar);
 
 
-export {router};
+export {router}; 

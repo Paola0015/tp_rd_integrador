@@ -10,8 +10,9 @@ export default class ReclamosService {
         return this.reclamos.buscarTodos();
     }
 
-    // buscarPorId = () => {
-    // }
+    buscarPorId = (idReclamo) => {
+        return this.reclamos.buscarPorId(idReclamo); 
+    }
     
     crear = (reclamo) => {
         return this.reclamos.crear(reclamo);

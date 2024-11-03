@@ -1,4 +1,3 @@
-import res from "express/lib/response.js";
 import UsuariosTipoService from "../services/usuariosTipoService.js"
 
 export default class UsuariosTipoController{
@@ -41,7 +40,7 @@ export default class UsuariosTipoController{
     
             console.log("Datos recibidos para actualizar el tipo de usuario:", datosActualizados);
     
-            const resultado = await this.service.actualizarUsuariosTipo(idUsuariosTipo, datosActualizados);
+            const [resultado] = await this.service.actualizarUsuariosTipo(idUsuariosTipo, datosActualizados);
             console.log(resultado);
             
             return res.status(200).send(resultado);

@@ -3,7 +3,17 @@ import { conexion } from "./conexion.js";
 export default class Oficinas{
 
     buscarTodos = async () => {
-        const sql = 'SELECT * FROM oficinas;';
+        const sql = `SELECT 
+                        o.idOficina,
+                        o.nombre AS nombreOficina,
+                        o.activo,
+                        rt.descripcion AS tipoReclamo
+                    FROM 
+                        oficinas o
+                    INNER JOIN 
+                        reclamosTipo rt ON o.idReclamoTipo = rt.idReclamoTipo
+                    WHERE 
+                        o.activo = 1;`;
         const [result] = await conexion.query(sql);
         return result;
     }
@@ -45,6 +55,30 @@ export default class Oficinas{
             console.error("Error al intentar crear el usuario:", error);
             throw error;
        }
-       }
+       };
+
+       actualizarOficina = async (idOficina, datosActualizados) => {
+        const sql = `UPDATE oficinas SET 
+            nombre = COALESCE(?, nombre),
+            idReclamoTipo = COALESCE(?, idReclamoTipo)
+            WHERE idOficina = ? AND activo = 1`;
+        
+        try {
+            const [result] = await conexion.query(sql, [
+                datosActualizados.nombre,
+                datosActualizados.idReclamoTipo, 
+                idOficina
+            ]);
+    
+            if (result.affectedRows === 0) {
+                throw new Error('Oficina no encontrada o no se puede actualizar');
+            }
+    
+            return { mensaje: 'Oficina actualizada correctamente' };
+        } catch (error) {
+            console.error("Error al intentar actualizar la oficina:", error);
+            throw new Error('Error al actualizar la oficina');
+        }
+    };
     
 }

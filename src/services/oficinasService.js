@@ -18,7 +18,11 @@ export default class OficinasService{
 
     crearOficina = (nuevaOficina) => {
         return this.oficinas.crearOficina(nuevaOficina);
-    }
+    };
+
+    actualizarOficina = (idOficina, datosActualizados)=>{
+        return this.oficinas.actualizarOficina(idOficina, datosActualizados);
+    };
 
 
 }

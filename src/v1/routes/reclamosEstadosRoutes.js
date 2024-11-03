@@ -7,8 +7,10 @@ const router = express.Router();
 const reclamosEstadosController = new ReclamosEstadosController();
 
 router.get('/', reclamosEstadosController.buscarTodos);
-// router.get('/:idReclamoEstado', reclamosEstadosController.buscarPorId);
+router.get('/:id', reclamosEstadosController.buscarPoId);
 router.post('/', reclamosEstadosController.crear);
-// router.patch('/idReclamoEstado', reclamosEstadosController.modificar);
+router.patch('/:id', reclamosEstadosController.actualizar);
+router.delete('/:id', reclamosEstadosController.borrar);
+router.post('/', reclamosEstadosController.crear);
 
 export {router};

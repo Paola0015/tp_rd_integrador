@@ -18,7 +18,7 @@ export default class UsuariosTipo{
         const sql = `UPDATE usuariosTipo SET 
             descripcion = COALESCE(?, descripcion),
             activo = COALESCE(?, activo)
-            WHERE idUsuarioTipo = ? AND activo = 1`;
+            WHERE idUsuarioTipo = ? AND activo = 1`; 
         
         try {
             const [result] = await conexion.query(sql, [

@@ -3,7 +3,7 @@ import ReclamosService from "../services/reclamosService.js";
 export default class ReclamosController{
 
     constructor(){
-        this.service = new ReclamosService();
+        this.service = new ReclamosService(); 
     }
 
     buscarTodos = async (req, res) => {
@@ -19,9 +19,22 @@ export default class ReclamosController{
         }
     }
 
-    // buscarPorId = async (req, res) => {
-    // }
     
+    buscarPorId = async (req, res) => {
+        try{
+            const idReclamo = req.params.id;
+            const reclamo = await this.service.buscarPorId(idReclamo);
+            if(!reclamo){
+                return res.status(404).send({mensaje:'Reclamo no encontrado'})
+            }
+            res.status(200).send(reclamo)
+
+        }catch(error){
+            res.status(500).send({
+                estado:"Falla", mensaje: "Error interno en servidor."
+            });
+        }
+    };
     // no recibo el idReclamoEstado, al crear un nuevo reclamo siempre sera de tipo 1 "creado"
     // fechaCreado lo hago con NOW() de mysql
     crear = async (req, res) => {

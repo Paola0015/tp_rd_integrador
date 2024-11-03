@@ -7,6 +7,7 @@ const oficinasController = new OficinasController();
 router.get('/', oficinasController.buscarTodos);
 router.get('/:id', oficinasController.buscarPorId);
 router.delete('/:id',oficinasController.borrarOficina);
+router.patch('/:id', oficinasController.actualizarOficina);
 router.post('/', oficinasController.crearOficina);
 
 export {router};
