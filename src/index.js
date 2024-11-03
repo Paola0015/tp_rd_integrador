@@ -5,15 +5,15 @@ import handlebars from "handlebars";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import v1Usuarios from "./v1/routes/usuariosRoutes.js"; // Importa rutas de usuarios
 
-// middlewares
+// Importar middlewares
 import validateContentType from "./middlewares/validateContentType.js";
 import { verifyToken, verifyRole } from "./middlewares/auth.js";
 
-// rutas
+// Importar otras rutas
 import { router as v1ReclamosEstadoRouter } from "./v1/routes/reclamosEstadosRoutes.js";
 import { router as v1ReclamosRouter } from "./v1/routes/reclamosRoutes.js";
-import { router as v1Usuarios } from "./v1/routes/usuariosRoutes.js";
 import { authRouter } from "./v1/routes/authRoutes.js";
 
 dotenv.config();
@@ -29,7 +29,6 @@ app.get("/", (req, res) => {
 });
 
 // Rutas de los EndPoints
-
 app.use(
   "/v1/reclamos-estados",
   verifyToken,

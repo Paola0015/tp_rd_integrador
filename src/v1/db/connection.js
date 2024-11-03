@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const connection = mysql.createPool({
-  host: "localhost",
-  user: "integrador",
-  password: "TPintegradorProg3&",
-  database: "rd_tp_integrador",
+  host: process.env.SERV,
+  user: process.env.USUARIO,
+  password: process.env.PASS,
+  database: process.env.DBNAME,
 });
 
 export default connection;
