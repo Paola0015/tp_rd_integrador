@@ -2,11 +2,11 @@
   "name": "tp_rd_integrador",
   "version": "1.0.0",
   "description": "tp_integrador_prog_III_2024",
-  "main": "index.js",
+  "main": "src/index.js",
   "type": "module",
   "scripts": {
     "dev": "node --watch ./src/index.js",
-    "start": "node src /index.js"
+    "start": "node src/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.0.0",
     "express": "^4.19.2",
     "fs": "0.0.1-security",
     "handlebars": "^4.7.8",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.11.3",
+    "mysql2": "^2.3.3",
     "nodemailer": "^6.9.15",
     "nodemon": "^3.1.4",
     "path": "^0.12.7"

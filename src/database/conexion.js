@@ -1,15 +1,13 @@
-import mysql from 'mysql2/promise';
-import dotenv from 'dotenv'
-
+import mysql from "mysql2/promise";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 export const conexion = await mysql.createConnection({
-    //Configración de la DB
-    host: process.env.SERV,
-    user: process.env.USUARIO,
-    database: process.env.DBNAME,
-    password: process.env.PASS,
+  host: "localhost",
+  user: "integrador",
+  database: "rd_tp_integrador",
+  password: "TPintegradorProg3&",
 });
 
-console.log('.oO( Conexión a la DB exitosa! )Oo.\n')
+console.log(".oO( Conexión a la DB exitosa! )Oo.\n");
