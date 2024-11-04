@@ -47,7 +47,7 @@ export default class Usuarios{
        crearUsuario = async (nuevoUsuario) => {
           
         const sql = `INSERT INTO usuarios (nombre, apellido, correoElectronico, contrasenia, idTipoUsuario, imagen, activo )
-                     VALUES (?, ?, ?, ?, ?, NULL, 1)`;
+                     VALUES (?, ?, ?, SHA2(?, 256), ?, NULL, 1)`;
 
         try{
             const {nombre, apellido, correoElectronico, contrasenia, idTipoUsuario} = nuevoUsuario;
@@ -86,4 +86,14 @@ export default class Usuarios{
                 throw new Error('Error al actualizar el usuario')
             }
        };
+
+       buscar = async (correoElectronico, contrasenia) => {
+        const sql = `SELECT u.idUsuario, CONCAT(u.nombre, ' ', u.apellido) as usuario, u.idTipoUsuario
+            FROM usuarios  AS u
+            WHERE u.correoElectronico = ? 
+                AND u.contrasenia = SHA2(?, 256) 
+                AND u.activo = 1;`
+        const [result] = await conexion.query(sql, [correoElectronico, contrasenia]);
+        return result[0];
+    }
 }

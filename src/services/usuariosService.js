@@ -29,4 +29,11 @@ export default class UsuariosService {
         return this.usuarios.actualizarUsuario(idUsuario, datosActualizados);
     }
 
+    //accesos y validacion
+
+    buscar = (correoElectronico, contrasenia)=>{
+        return this.usuarios.buscar(correoElectronico,contrasenia);
+
+    }
+
 }
