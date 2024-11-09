@@ -1,32 +1,31 @@
 import Usuarios from "../database/usuarios.js";
 
 export default class UsuariosService {
-    constructor(){
-        this.usuarios = new Usuarios(); 
-    }
+  constructor() {
+    this.usuarios = new Usuarios();
+  }
 
-    buscarTodos = () => {
-        return this.usuarios.buscarTodos();
-    }
-    
-    buscarActivos = () => {
-        return this.usuarios.buscarActivos();
-    }
+  buscarTodos = () => {
+    return this.usuarios.buscarTodos();
+  };
 
-    buscarPorId = (idUsuario) => {
-        return this.usuarios.buscarPorId(idUsuario);
-    }
+  buscarActivos = () => {
+    return this.usuarios.buscarActivos();
+  };
 
-    borrarUsuario = (idUsuario) => {
-        return this.usuarios.borrarPorId(idUsuario);
-    }
+  buscarPorId = (idUsuario) => {
+    return this.usuarios.buscarPorId(idUsuario);
+  };
 
-    crearUsuario = (nuevoUsuario) => {
-        return this.usuarios.crearUsuario(nuevoUsuario);
-    }
+  borrarUsuario = (idUsuario) => {
+    return this.usuarios.borrarPorId(idUsuario);
+  };
 
-    actualizarUsuario = (idUsuario, datosActualizados) =>{
-        return this.usuarios.actualizarUsuario(idUsuario, datosActualizados);
-    }
+  crearUsuario = (nuevoUsuario) => {
+    return this.usuarios.crearUsuario(nuevoUsuario);
+  };
 
+  actualizarUsuario = (idUsuario, datosActualizados) => {
+    return this.usuarios.actualizarUsuario(idUsuario, datosActualizados);
+  };
 }

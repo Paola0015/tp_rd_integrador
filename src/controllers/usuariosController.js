@@ -39,13 +39,11 @@ class UsuariosController {
       const usuarios = await this.service.buscarTodos();
       res.status(200).json(usuarios);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          estado: "Falla",
-          mensaje: "Error interno en el servidor.",
-          error: error.message,
-        });
+      res.status(500).json({
+        estado: "Falla",
+        mensaje: "Error interno en el servidor.",
+        error: error.message,
+      });
     }
   };
 
@@ -59,13 +57,11 @@ class UsuariosController {
       }
       res.status(200).json(usuario);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          estado: "Falla",
-          mensaje: "Error interno en el servidor.",
-          error: error.message,
-        });
+      res.status(500).json({
+        estado: "Falla",
+        mensaje: "Error interno en el servidor.",
+        error: error.message,
+      });
     }
   };
 
@@ -82,13 +78,11 @@ class UsuariosController {
       }
       res.status(200).json(usuarioActualizado);
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          estado: "Falla",
-          mensaje: "Error interno en el servidor.",
-          error: error.message,
-        });
+      res.status(500).json({
+        estado: "Falla",
+        mensaje: "Error interno en el servidor.",
+        error: error.message,
+      });
     }
   };
 
@@ -104,13 +98,11 @@ class UsuariosController {
         .status(200)
         .json({ estado: "OK", mensaje: "Usuario borrado correctamente." });
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          estado: "Falla",
-          mensaje: "Error interno en el servidor.",
-          error: error.message,
-        });
+      res.status(500).json({
+        estado: "Falla",
+        mensaje: "Error interno en el servidor.",
+        error: error.message,
+      });
     }
   };
 }
